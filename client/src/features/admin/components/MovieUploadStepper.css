@@ -1,0 +1,168 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.stepper-container {
+  width: 600px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stepper-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.stepper-button {
+  min-width: 120px;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.stepper-button.white {
+  color: #fff;
+  background-color: #f44336;
+}
+
+.stepper-button.white:hover {
+  background-color: #d32f2f;
+}
+
+.stepper-button.white:active {
+  background-color: #b71c1c;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+input[type="date"],
+input[type="file"],
+input[type="url"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.duration-container {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.duration-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stepper-message {
+  margin-bottom: 16px;
+}
+
+/* Adjust step indicator styles */
+.MuiStepIcon-root,
+.MuiStepIcon-active,
+.MuiStepLabel-label.MuiStepLabel-active,
+.MuiStepLabel-label.MuiStepLabel-completed {
+  color: #f44336;
+}
+
+/* Add Netflix logo */
+.netflix-logo {
+  width: 50px;
+  height: 50px;
+  background-image: url("path/to/netflix-logo.png");
+  background-size: cover;
+  margin-bottom: 24px;
+}
+
+/* Apply Netflix's typography styles */
+h6 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+/* Customize optional label */
+.MuiStepLabel-label .MuiTypography-caption {
+  color: #999;
+  font-size: 14px;
+}
+
+/* Adjust progress bar styles */
+.MuiLinearProgress-colorPrimary {
+  background-color: #ddd;
+  height: 8px;
+  border-radius: 4px;
+}
+
+.MuiLinearProgress-barColorPrimary {
+  background-color: #f44336;
+}
+
+/* Add animation to buttons */
+.stepper-button:hover {
+  background-color: #f44336;
+  transform: translateY(-2px);
+}
+
+.stepper-button:active {
+  background-color: #b71c1c;
+  transform: translateY(1px);
+}
+
+/* Add background pattern */
+.stepper-container {
+  background-image: url("path/to/background-pattern.png");
+  background-repeat: repeat;
+}
+
+/* Adjust overall container styling */
+.container {
+  background-color: #000;
+}
+
+/* Horizontal layout for rating and duration */
+.duration-container {
+  flex-direction: row;
+}
+
+.duration-input {
+  padding: 10px;
+  flex: 1;
+}
+
+/* Additional Styles */
+
+.upload-section {
+  margin-bottom: 16px;
+}
+
+.upload-section label {
+  display: block;
+  margin-bottom: 8px;
+}
