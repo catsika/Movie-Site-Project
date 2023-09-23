@@ -73,7 +73,7 @@ export const SignInFormComponent: FC = () => {
         if (slug === "/admin/login") {
           navigate("/admin/dashboard");
         } else {
-          navigate("/stream");
+          navigate("/");
         }
       }, 1000);
 
@@ -240,7 +240,7 @@ export const SignInFormComponent: FC = () => {
 
               <CustomButton
                 variant="contained"
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/registration/signup")}
                 sx={{
                   backgroundColor: "gray",
                   height: "40px",

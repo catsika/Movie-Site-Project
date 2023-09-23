@@ -70,7 +70,7 @@ export const SignUpFormComponent: FC = () => {
   useEffect(() => {
     if (isSuccess) {
       const timeoutId = setTimeout(() => {
-        navigate("/login");
+        navigate("/registration/signin");
         dispatch(reset());
       }, 5000); // 10000 milliseconds = 10 seconds
 
@@ -234,7 +234,7 @@ export const SignUpFormComponent: FC = () => {
               </Divider>
               <CustomButton
                 variant="contained"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/registration/signin")}
                 sx={{
                   backgroundColor: "gray",
                   height: "40px",

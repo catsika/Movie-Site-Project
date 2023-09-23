@@ -1,5 +1,9 @@
 const NotFoundPage = () => {
-  return <>Page Not Found</>;
+  return (
+    <>
+      <p style={{ color: "white" }}>Page Not Found</p>
+    </>
+  );
 };
 
 export default NotFoundPage;

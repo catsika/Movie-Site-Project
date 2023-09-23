@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./slider.css";
 import { Movie } from "../stream/models/movie.interface";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,9 +13,6 @@ const Slider: React.FC<{
   id: string;
 }> = ({ movies, carouselDesc, id }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const controlContainerRef = useRef<HTMLDivElement>(null);
-  const [isControlContainerVisible, setControlContainerVisible] =
-    useState(false);
 
   useEffect(() => {
     const carousel = {
@@ -40,37 +38,18 @@ const Slider: React.FC<{
     };
   }, [id]);
 
-  const handleContainerMouseEnter = () => {
-    setControlContainerVisible(true);
-  };
-
-  const handleContainerMouseLeave = () => {
-    setControlContainerVisible(false);
-  };
-
   return (
-    <div>
+    <div className={`carousel ${id}`}>
       <div className="carousel-text">{carouselDesc}</div>
-      <div
-        id="carousel"
-        className="browse_container"
-        ref={containerRef}
-        onMouseEnter={handleContainerMouseEnter}
-        onMouseLeave={handleContainerMouseLeave}
-      >
-        <div
-          className="control-container"
-          ref={controlContainerRef}
-          style={{
-            visibility: isControlContainerVisible ? "visible" : "hidden",
-          }}
-        >
-          {/* Your control buttons here */}
-        </div>
-
+      <div id="carousel" className="browse_container" ref={containerRef}>
         <div className="items" id={`carousel-items-${id}`}>
           {movies.map((movie) => (
-            <div className="item" key={movie._id}>
+            <Link
+              to={`/title/tt-${movie._id.slice(0, 8)}`}
+              state={{ _id: movie._id }}
+              className="item"
+              key={movie._id}
+            >
               <img className="item-image" src={movie.media.poster} alt="Item" />
               <a href={"#"}>
                 <span
@@ -82,7 +61,7 @@ const Slider: React.FC<{
                   <i className="fa fa-play"></i>
                 </span>
               </a>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

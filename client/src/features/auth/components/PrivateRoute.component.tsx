@@ -29,7 +29,7 @@ const PrivateRoute = ({ page }: { page: JSX.Element }) => {
     const verifyToken = async () => {
       if (!jwt && !localStorageJwt && !isAuthenticatedLocalStorage) {
         // Neither jwt nor localStorageJwt exists, throw unauthorized error
-        setAuthorizedPage(<Navigate replace to="/login" />);
+        setAuthorizedPage(<Navigate replace to="/registration/signin" />);
       } else if (!jwt && localStorageJwt) {
         // jwt doesn't exist, but localStorageJwt exists
         const parsedJwt = JSON.parse(localStorageJwt);
@@ -64,7 +64,7 @@ const PrivateRoute = ({ page }: { page: JSX.Element }) => {
           decodedJwt.user.role?.toLowerCase() !== "admin"
         ) {
           if (!slug.startsWith("/admin/login")) {
-            setAuthorizedPage(<Navigate replace to="/login" />);
+            setAuthorizedPage(<Navigate replace to="/registration/signin" />);
           } else {
             // Handle /admin/login route separately
             setAuthorizedPage(page);
@@ -74,7 +74,7 @@ const PrivateRoute = ({ page }: { page: JSX.Element }) => {
         }
       } else {
         // Not authorized, redirect to login page
-        setAuthorizedPage(<Navigate replace to="/login" />);
+        setAuthorizedPage(<Navigate replace to="/registration/signin" />);
       }
     };
 
