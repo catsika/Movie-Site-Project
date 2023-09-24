@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 export const ContainerCustom = styled("div")((props) =>
   css({
     backgroundColor: props.color,
+    marginTop: "-13px",
     position: "fixed",
     width: "100%",
     zIndex: "100",

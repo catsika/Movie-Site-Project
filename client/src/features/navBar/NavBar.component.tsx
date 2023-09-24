@@ -11,7 +11,11 @@ import {
 } from "./NavBar.styled";
 import SearchIcon from "@mui/icons-material/Search";
 
-export const NavBar = () => {
+interface NavBarProps {
+  customColor?: string; // Optional custom color prop
+}
+
+export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
   const [activeTab, setActiveTab] = useState<string>("Browse");
   const [prevTab, setPrevTab] = useState<string>("");
   const [isToggled, setIsToggled] = useState<boolean>(false);
@@ -24,6 +28,10 @@ export const NavBar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      if (customColor) {
+        return; // If customColor prop is provided, do not change the background color based on scroll
+      }
+
       const scrollPosition = window.scrollY;
       if (scrollPosition > 0) {
         setBackgroundColor("black");
@@ -32,12 +40,16 @@ export const NavBar = () => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    if (!customColor) {
+      window.addEventListener("scroll", handleScroll);
+    }
 
+    return () => {
+      if (!customColor) {
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [customColor]);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -79,14 +91,14 @@ export const NavBar = () => {
   // ...
 
   return (
-    <ContainerCustom color={backgroundColor}>
+    <ContainerCustom color={customColor || backgroundColor}>
       <Content className="parallax">
         <Logo>
-          <a href="/home">
+          <a href="/">
             <img
               src="/images/site-logo.png "
               alt="site-logo"
-              style={{ height: "65px" }}
+              style={{ height: "55px" }}
             />
           </a>
         </Logo>
@@ -130,26 +142,6 @@ export const NavBar = () => {
             >
               <a>
                 <span>TV Shows</span>
-              </a>
-            </NavListItem>
-            <NavListItem
-              className={activeTab === "Movies" ? "active" : ""}
-              onMouseEnter={() => handleTabHover("Movies")}
-              onMouseLeave={handleTabLeave}
-              onClick={() => handleTabClick("Movies")}
-            >
-              <a>
-                <span>Movies</span>
-              </a>
-            </NavListItem>
-            <NavListItem
-              className={activeTab === "Kids" ? "active" : ""}
-              onMouseEnter={() => handleTabHover("Kids")}
-              onMouseLeave={handleTabLeave}
-              onClick={() => handleTabClick("Kids")}
-            >
-              <a>
-                <span>Kids</span>
               </a>
             </NavListItem>
 

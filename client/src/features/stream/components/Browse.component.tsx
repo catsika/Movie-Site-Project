@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../hooks/redux/hooks";
 import { Movie } from "../models/movie.interface";
 import { getAllMovies } from "../streamSlice";
-import { NavBar } from "./NavBar.component";
+import { NavBar } from "../../navBar/NavBar.component";
 import { TopBanner } from "./Browse.styled";
 import Slider from "../../Slider/Slider";
 import {
@@ -51,7 +51,7 @@ const BrowseComponent = () => {
       {isLoading ? (
         <p>Loading...</p> // You can replace this with a loading spinner or other UI
       ) : (
-        <>
+        <div className="main_container">
           <Slider
             movies={new_releases(movies)}
             carouselDesc="New Releases"
@@ -77,7 +77,7 @@ const BrowseComponent = () => {
             carouselDesc="Recently Viewed"
             id="recently_viewed"
           />
-        </>
+        </div>
       )}
     </>
   );
