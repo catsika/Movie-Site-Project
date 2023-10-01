@@ -1,0 +1,102 @@
+/* Meta.css */
+.wrapper {
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    black,
+    /* Black as the starting color */ #281f0b /* #ffcc66 as the ending color */
+  );
+
+  font-family: "Roboto", sans-serif;
+}
+
+.movie-card {
+  color: #fff;
+  padding-left: 150px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-right: 50px;
+  height: 450px;
+  margin: 0px auto;
+  display: flex;
+  max-width: fit-content;
+}
+
+.card-details {
+  width: 90%;
+  padding: 30px;
+  margin-top: -25px;
+}
+
+.card-details h1 {
+  font-size: 30px;
+}
+
+.card-right img {
+  height: 450px;
+  border-radius: 8px;
+}
+
+.card-right {
+  border-radius: 2px;
+}
+
+.card-categories {
+  max-width: fit-content;
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie-rating,
+.release-year,
+.movie-genre,
+.movie-duration {
+  color: #fff;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 15px;
+}
+
+.movie-rating {
+  background: linear-gradient(
+    to right,
+    black,
+    /* Black as the starting color */ #ffcc66 /* #ffcc66 as the ending color */
+  );
+  transition: 300ms ease-in-out;
+}
+.movie-label {
+  margin-top: 60px;
+  color: #ffcc66;
+  font-weight: bold;
+}
+
+.movie-description {
+  font-weight: 100;
+  line-height: 27px;
+}
+
+.social-buttons {
+  margin-left: -10px;
+}
+
+button {
+  color: #fff;
+  border: none;
+  padding: 20px;
+  outline: none;
+  font-size: 12px;
+  margin-top: 30px;
+  margin-left: 10px;
+  background: linear-gradient(
+    to right,
+    black,
+    /* Black as the starting color */ #ffcc66 /* #ffcc66 as the ending color */
+  );
+  border-radius: 12px;
+  transition: 200ms ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+}

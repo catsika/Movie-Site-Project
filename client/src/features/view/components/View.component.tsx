@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../../hooks/redux/hooks";
 import { getSelectMovie } from "../viewSlice";
 import { Movie } from "../../stream/models/movie.interface";
 import { useLocation } from "react-router-dom";
-import { NavBar } from "../../navBar/NavBar.component";
+import ViewContainer from "./ViewContainer.component";
 
 const ViewComponent = () => {
   const dispatch = useAppDispatch();
@@ -49,12 +49,7 @@ const ViewComponent = () => {
     return null; // You can return a loading indicator or handle the error case here
   }
 
-  return (
-    <>
-      <NavBar customColor="black" />
-      {<pre>{JSON.stringify(selectedMovie, null, 2)}</pre>}
-    </>
-  );
+  return <ViewContainer metaData={selectedMovie} />;
 };
 
 export default ViewComponent;
