@@ -1,0 +1,57 @@
+/* Extras.css */
+
+.extras-container {
+  display: flex;
+  margin-top: 20px;
+  padding: 20px;
+  border-bottom: 1px solid #92828255; /* Lighter grey border bottom */
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.extras-left {
+  flex: 5;
+  padding: 10px;
+  margin-left: 40px;
+}
+
+.extras-right-sidebar {
+  flex: 1.5;
+  padding: 10px;
+}
+
+.extras-media {
+  margin: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #ffcc66;
+  font-size: large;
+}
+
+.medias {
+  display: flex;
+  justify-content: space-between;
+}
+.extras-status,
+.extras-genre,
+.extras-original-language,
+.extras-budget,
+.extras-revenue {
+  margin-bottom: 20px;
+}
+
+.extras-status p,
+.extras-genre p,
+.extras-original-language p,
+.extras-budget p,
+.extras-revenue p,
+.extras-keywords p {
+  margin: 0;
+  font-weight: bold;
+  color: #ffcc66;
+}
+
+.extras-info {
+  color: white !important;
+  font-weight: 100 !important;
+}

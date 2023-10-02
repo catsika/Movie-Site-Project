@@ -2,15 +2,15 @@
 .wrapper {
   width: 100%;
   font-family: "Roboto", sans-serif;
-  background: linear-gradient(to right, black, #281f0b);
+  border-bottom: 1px solid #92828255; /* Lighter grey border bottom */
 }
 
 .movie-card {
   color: #fff;
   height: 450px;
   display: flex;
-  padding: 50px 50px;
-  margin: 0 auto;
+  padding: 50px;
+  margin-left: 30px;
   max-width: fit-content;
 }
 
@@ -84,7 +84,7 @@
 
 .movie-description {
   line-height: 27px;
-  max-width: 700px;
+  max-width: 900px;
 }
 
 .rating p,
@@ -129,6 +129,7 @@
 button {
   height: 50px;
   color: #fff;
+  cursor: pointer;
   border: none;
   padding: 10px;
   outline: none;

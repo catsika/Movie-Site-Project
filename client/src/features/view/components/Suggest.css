@@ -1,0 +1,19 @@
+/* Suggest.css */
+
+.suggest-container {
+  padding: 20px;
+  border-bottom: 1px solid #92828255; /* Lighter grey border bottom */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.label {
+  margin-left: 40px; /* Remove the margin */
+  font-weight: bold;
+  color: #ffcc66;
+  font-size: large;
+  margin-bottom: -5px; /* Add margin at the bottom for spacing */
+}
+
+.slides {
+  margin-left: 20px; /* Remove the margin */
+}

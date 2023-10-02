@@ -10,6 +10,7 @@ interface IVideoPlayerProps {
 
 const initialOptions: videojs.PlayerOptions = {
   controls: true,
+  aspectRatio: "16:9",
   fluid: true,
   controlBar: {
     volumePanel: {
