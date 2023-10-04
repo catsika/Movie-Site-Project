@@ -62,6 +62,16 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
     };
   }, []);
 
+  // Define an array of allowed routes
+  const allowedRoutes = ["/", "/featured", "/channels", "/news"];
+
+  // Function to handle navigation based on the clicked item
+  const handleTabClick = (url: string) => {
+    if (allowedRoutes.includes(url)) {
+      navigate(url);
+    }
+  };
+
   return (
     <ContainerCustom color={customColor || backgroundColor}>
       <Content className="parallax">
@@ -77,17 +87,15 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
         <NavBucket color={backgroundColor}>
           <NavListWrap>
             {[
-              { label: "Channels", url: "#" },
+              { label: "Channels", url: "/channels" },
               { label: "Browse", url: "/" },
               { label: "Featured", url: "/featured" },
-              { label: "TV Shows", url: "#" },
+              { label: "News", url: "/news" },
             ].map((item) => (
               <NavListItem
                 key={item.label}
-                className={
-                  location.pathname === item.url ? "active" : "" // Check if the location matches the tab's URL
-                }
-                onClick={() => navigate(item.url)} // Navigate directly without setting active tab
+                className={location.pathname === item.url ? "active" : ""}
+                onClick={() => handleTabClick(item.url)}
               >
                 <a>
                   <span>{item.label}</span>
