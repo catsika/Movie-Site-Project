@@ -10,13 +10,14 @@
 }
 
 .extras-left {
-  flex: 5;
+  width: 70%;
   padding: 10px;
   margin-left: 40px;
 }
 
 .extras-right-sidebar {
-  flex: 1.5;
+  width: 30%;
+  margin-left: 5em;
   padding: 10px;
 }
 
@@ -35,6 +36,7 @@
 .extras-status,
 .extras-genre,
 .extras-original-language,
+.extras-rating,
 .extras-budget,
 .extras-revenue {
   margin-bottom: 20px;
@@ -43,9 +45,9 @@
 .extras-status p,
 .extras-genre p,
 .extras-original-language p,
+.extras-rating p,
 .extras-budget p,
-.extras-revenue p,
-.extras-keywords p {
+.extras-revenue p {
   margin: 0;
   font-weight: bold;
   color: #ffcc66;

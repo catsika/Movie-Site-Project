@@ -11,7 +11,7 @@ export const ContainerCustom = styled("div")((props) =>
     transform: "translateY(0)",
     transition: "transform 0.3s ease-out",
     "&.parallax": {
-      transform: "translateY(-50px)", // Adjust the translateY value as needed for desired parallax effect
+      transform: "translateY(-50px)",
     },
   })
 );
@@ -26,7 +26,7 @@ export const Content = styled(Box)(() => ({
 
 export const Logo = styled(Box)(() => ({
   marginLeft: "25px",
-  fontSize: "0px",
+  fontSize: "0",
 }));
 
 export const NavBucket = styled("nav")(() => ({
@@ -35,7 +35,7 @@ export const NavBucket = styled("nav")(() => ({
   marginLeft: "auto",
   marginRight: "auto",
   borderRadius: "50px",
-  padding: "8px 16px", // Adjust the padding here
+  padding: "8px 16px",
   height: "40px",
 }));
 
@@ -65,29 +65,17 @@ export const NavListItem = styled("li")(() => ({
   span: {
     color: "white",
     display: "flex",
+    padding: "5px",
     alignItems: "center",
   },
-  "&.active": {
-    // Select the active class here
-    a: {
-      span: {
-        color: "rgba(0, 0, 0, 0.9)",
-        borderRadius: "40px",
-        padding: "15px 26px",
-        background: "linear-gradient(to right, #FFFF99, orange)", // Apply gradient here
-      },
-    },
+  "&.active a span": {
+    color: "rgba(0, 0, 0, 0.9)",
+    borderRadius: "40px",
+    padding: "15px 26px",
+    background: "linear-gradient(to right, #FFFF99, orange)",
   },
   "&:hover": {
     cursor: "pointer",
-    a: {
-      span: {
-        color: "rgba(0, 0, 0, 0.9)",
-        borderRadius: "40px",
-        padding: "15px 26px",
-        background: "linear-gradient(to right, #FFCC66, black)", // Darker shade gradient
-      },
-    },
   },
 }));
 
@@ -101,12 +89,12 @@ export const Search = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   marginRight: "5px",
-  fontSize: "0px",
+  fontSize: "0",
   position: "relative",
   visibility: "hidden",
   input: {
     background: "transparent",
-    width: "0px",
+    width: "0",
     height: "34px",
     boxShadow: "none",
     color: "#fff",
@@ -125,7 +113,6 @@ export const Search = styled(Box)(() => ({
     },
   },
   ".searchIcon": {
-    // Use class selector to target the search icon
     position: "absolute",
     top: "50%",
     transform: "translateY(-50%)",
@@ -142,5 +129,5 @@ export const Search = styled(Box)(() => ({
 }));
 
 export const User = styled(Box)(() => ({
-  fontSize: "0px",
+  fontSize: "0",
 }));

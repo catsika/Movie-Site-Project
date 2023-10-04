@@ -10,17 +10,18 @@ import {
   Search,
 } from "./NavBar.styled";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate, useLocation } from "react-router-dom";
 
 interface NavBarProps {
   customColor?: string; // Optional custom color prop
 }
 
 export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
-  const [activeTab, setActiveTab] = useState<string>("Browse");
-  const [prevTab, setPrevTab] = useState<string>("");
   const [isToggled, setIsToggled] = useState<boolean>(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const [backgroundColor, setBackgroundColor] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation(); // Get the current route location
 
   const handleSearchClick = () => {
     setIsToggled(!isToggled);
@@ -28,15 +29,8 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (customColor) {
-        return; // If customColor prop is provided, do not change the background color based on scroll
-      }
-
-      const scrollPosition = window.scrollY;
-      if (scrollPosition > 0) {
-        setBackgroundColor("black");
-      } else {
-        setBackgroundColor("transparent");
+      if (!customColor) {
+        setBackgroundColor(window.scrollY > 0 ? "black" : "transparent");
       }
     };
 
@@ -50,6 +44,7 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
       }
     };
   }, [customColor]);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -67,36 +62,13 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
     };
   }, []);
 
-  // .
-
-  const handleTabHover = (tab: string) => {
-    if (!prevTab && activeTab && activeTab !== tab) {
-      setPrevTab(activeTab);
-      setActiveTab(""); // Remove active status during hover
-    }
-  };
-
-  const handleTabLeave = () => {
-    if (!activeTab && prevTab) {
-      setActiveTab(prevTab);
-      setPrevTab("");
-    }
-  };
-
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
-    setPrevTab(""); //
-  };
-
-  // ...
-
   return (
     <ContainerCustom color={customColor || backgroundColor}>
       <Content className="parallax">
         <Logo>
           <a href="/">
             <img
-              src="/images/site-logo.png "
+              src="/images/site-logo.png"
               alt="site-logo"
               style={{ height: "55px" }}
             />
@@ -104,48 +76,24 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
         </Logo>
         <NavBucket color={backgroundColor}>
           <NavListWrap>
-            <NavListItem
-              className={activeTab === "Home" ? "active" : ""}
-              onMouseEnter={() => handleTabHover("Home")}
-              onMouseLeave={handleTabLeave}
-              onClick={() => handleTabClick("Home")}
-            >
-              <a>
-                <span>Channels</span>
-              </a>
-            </NavListItem>
-            <NavListItem
-              className={activeTab === "Browse" ? "active" : ""}
-              onMouseEnter={() => handleTabHover("Browse")}
-              onMouseLeave={handleTabLeave}
-              onClick={() => handleTabClick("Browse")}
-            >
-              <a>
-                <span>Browse</span>
-              </a>
-            </NavListItem>
-            <NavListItem
-              className={activeTab === "Recently Added" ? "active" : ""}
-              onMouseEnter={() => handleTabHover("Recently Added")}
-              onMouseLeave={handleTabLeave}
-              onClick={() => handleTabClick("Recently Added")}
-            >
-              <a>
-                <span>Featured</span>
-              </a>
-            </NavListItem>
-            <NavListItem
-              className={activeTab === "TV Shows" ? "active" : ""}
-              onMouseEnter={() => handleTabHover("TV Shows")}
-              onMouseLeave={handleTabLeave}
-              onClick={() => handleTabClick("TV Shows")}
-            >
-              <a>
-                <span>TV Shows</span>
-              </a>
-            </NavListItem>
-
-            {/* Add more list items as needed */}
+            {[
+              { label: "Channels", url: "#" },
+              { label: "Browse", url: "/" },
+              { label: "Featured", url: "/featured" },
+              { label: "TV Shows", url: "#" },
+            ].map((item) => (
+              <NavListItem
+                key={item.label}
+                className={
+                  location.pathname === item.url ? "active" : "" // Check if the location matches the tab's URL
+                }
+                onClick={() => navigate(item.url)} // Navigate directly without setting active tab
+              >
+                <a>
+                  <span>{item.label}</span>
+                </a>
+              </NavListItem>
+            ))}
           </NavListWrap>
         </NavBucket>
         <AccountBox>

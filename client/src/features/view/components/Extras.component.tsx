@@ -37,6 +37,12 @@ const Extras = ({ metaData }: { metaData: Movie }) => {
           <p>Original Language</p>
           <p className="extras-info">English</p>
         </div>
+
+        <div className="extras-rating">
+          <p>Rating</p>
+          <p className="extras-info">{metaData.details.rating} - IMDB</p>
+        </div>
+
         <div className="extras-budget">
           <p>Budget</p>
           <p className="extras-info">-</p>
@@ -44,10 +50,6 @@ const Extras = ({ metaData }: { metaData: Movie }) => {
         <div className="extras-revenue">
           <p>Revenue</p>
           <p className="extras-info">-</p>
-        </div>
-        <div className="extras-keywords">
-          <p>Keywords</p>
-          <p className="extras-info">No keywords have been added</p>
         </div>
       </section>
     </div>

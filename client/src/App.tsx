@@ -9,6 +9,7 @@ import PrivateRoute from "./features/auth/components/PrivateRoute.component";
 import { AdminSignIn } from "./pages/AdminSignIn.page";
 import { AdminDashboard } from "./pages/AdminDashboard.page";
 import ViewComponent from "./features/view/components/View.component";
+import FeaturedPage from "./pages/Featured.page";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<PrivateRoute page={<StreamPage />} />} />
+          <Route
+            path="/featured"
+            element={<PrivateRoute page={<FeaturedPage />} />}
+          />
           <Route path="/admin/*">
             <Route
               path="login"

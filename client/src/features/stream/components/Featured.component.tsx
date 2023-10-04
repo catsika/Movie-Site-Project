@@ -11,7 +11,7 @@ import {
   top_rated,
 } from "../../algorithms/sorting";
 
-const BrowseComponent = () => {
+const FeaturedComponent = () => {
   const dispatch = useAppDispatch();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -72,4 +72,4 @@ const BrowseComponent = () => {
   );
 };
 
-export default BrowseComponent;
+export default FeaturedComponent;
