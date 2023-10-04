@@ -51,16 +51,14 @@ const Slider: React.FC<{
               key={movie._id}
             >
               <img className="item-image" src={movie.media.poster} alt="Item" />
-              <a href={"#"}>
-                <span
-                  className="item-load-icon button opacity-none"
-                  style={{
-                    background: "linear-gradient(to right, #FFCC66, black)",
-                  }}
-                >
-                  <i className="fa fa-play"></i>
-                </span>
-              </a>
+              <span
+                className="item-load-icon button opacity-none"
+                style={{
+                  background: "linear-gradient(to right, #FFCC66, black)",
+                }}
+              >
+                <i className="fa fa-play"></i>
+              </span>
             </Link>
           ))}
         </div>

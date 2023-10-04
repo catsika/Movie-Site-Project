@@ -87,10 +87,10 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
         <NavBucket color={backgroundColor}>
           <NavListWrap>
             {[
-              { label: "Channels", url: "/channels" },
+              { label: "Channels", url: "#" },
               { label: "Browse", url: "/" },
               { label: "Featured", url: "/featured" },
-              { label: "News", url: "/news" },
+              { label: "News", url: "#" },
             ].map((item) => (
               <NavListItem
                 key={item.label}

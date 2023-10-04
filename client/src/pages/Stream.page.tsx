@@ -1,4 +1,4 @@
-import BrowseComponent from "../features/stream/components/Browse.component";
+import BrowseComponent from "../features/stream/components/browse/Browse.component";
 
 const StreamPage = () => {
   return <BrowseComponent />;

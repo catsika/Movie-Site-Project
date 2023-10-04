@@ -1,4 +1,4 @@
-import FeaturedComponent from "../features/stream/components/Featured.component";
+import FeaturedComponent from "../features/stream/components/featured/Featured.component";
 
 const FeaturedPage = () => {
   return <FeaturedComponent />;

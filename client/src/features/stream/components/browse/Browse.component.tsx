@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../../hooks/redux/hooks";
-import { Movie } from "../models/movie.interface";
-import { getAllMovies } from "../streamSlice";
-import { NavBar } from "../../navBar/NavBar.component";
+import { useAppDispatch } from "../../../../hooks/redux/hooks";
+import { Movie } from "../../models/movie.interface";
+import { getAllMovies } from "../../streamSlice";
+import { NavBar } from "../../../navBar/NavBar.component";
 import { TopBanner } from "./Browse.styled";
-import Slider from "../../Slider/Slider";
-import {
-  new_releases,
-  newly_added_sort,
-  top_rated,
-} from "../../algorithms/sorting";
+import "./Browser.css";
+import { Link } from "react-router-dom";
 
 const BrowseComponent = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +18,7 @@ const BrowseComponent = () => {
       const movieData = response.payload;
       setMovies(movieData as Movie[]);
       setIsLoading(false);
+      console.log(movies);
     } catch (error) {
       console.error(error);
     }
@@ -49,23 +46,29 @@ const BrowseComponent = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div className="main_container">
-          <Slider
-            movies={new_releases(movies)}
-            carouselDesc="New Releases"
-            id="new_releases"
-          />
-          <Slider
-            movies={newly_added_sort(movies)}
-            carouselDesc="Just Added"
-            id="Just_added"
-          />
-          <Slider
-            movies={top_rated(movies)}
-            carouselDesc="Top Rated"
-            id="top_rated"
-          />
-          {/* You can add more Slider components as needed */}
+        <div className="items-b">
+          {movies.map((movie) => (
+            <Link
+              to={`/title/tt-${movie._id.slice(0, 8)}`}
+              state={{ _id: movie._id }}
+              className="item-b"
+              key={movie._id}
+            >
+              <img
+                className="item-image-b"
+                src={movie.media.poster}
+                alt="Item"
+              />
+              <span
+                className="item-load-icon button opacity-none"
+                style={{
+                  background: "linear-gradient(to right, #FFCC66, black)",
+                }}
+              >
+                <i className="fa fa-play"></i>
+              </span>
+            </Link>
+          ))}
         </div>
       )}
     </>

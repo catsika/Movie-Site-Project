@@ -70,8 +70,8 @@
 }
 
 .item img.item-image {
-  width: 250px;
-  height: 350px;
+  width: 220px;
+  height: 330px;
   object-fit: cover;
   border-radius: 5px;
 }

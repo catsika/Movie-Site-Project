@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../../hooks/redux/hooks";
-import { Movie } from "../models/movie.interface";
-import { getAllMovies } from "../streamSlice";
-import { NavBar } from "../../navBar/NavBar.component";
-import { TopBanner } from "./Browse.styled";
-import Slider from "../../Slider/Slider";
+import { useAppDispatch } from "../../../../hooks/redux/hooks";
+import { Movie } from "../../models/movie.interface";
+import { getAllMovies } from "../../streamSlice";
+import { NavBar } from "../../../navBar/NavBar.component";
+import { TopBanner } from "./Featured.styled";
+import Slider from "../../../slider/Slider";
 import {
   new_releases,
   newly_added_sort,
   top_rated,
-} from "../../algorithms/sorting";
+} from "../../../algorithms/sorting";
 
 const FeaturedComponent = () => {
   const dispatch = useAppDispatch();
@@ -49,7 +49,7 @@ const FeaturedComponent = () => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div className="main_container">
+        <div>
           <Slider
             movies={new_releases(movies)}
             carouselDesc="New Releases"
