@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { getAllMovies } from "../stream/streamSlice";
 import { Movie } from "../stream/models/movie.interface";
 
-const RecommendAlgo = (genre: string[], _id: string) => {
+const RecommendAlgo = (genre: string[], _id?: string) => {
   const dispatch = useAppDispatch();
   const [sortedMovies, setSortedMovies] = useState<Movie[]>([]);
 
@@ -15,6 +15,7 @@ const RecommendAlgo = (genre: string[], _id: string) => {
 
         const sortedMovies = movies
           .slice()
+          .filter((movie) => genre.some((g) => movie.genre.includes(g))) // Filter movies with at least one matching genre
           .sort((movieA, movieB) => {
             const similarityA =
               genre.filter((g) => movieA.genre.includes(g)).length /
@@ -22,9 +23,7 @@ const RecommendAlgo = (genre: string[], _id: string) => {
             const similarityB =
               genre.filter((g) => movieB.genre.includes(g)).length /
               new Set([...genre, ...movieB.genre]).size;
-            const primarySort = similarityB - similarityA;
-            const secondarySort = movieB.details.rating - movieA.details.rating;
-            return primarySort || secondarySort;
+            return similarityB - similarityA; // Only primary sorting based on genre similarity
           })
           .filter((movie) => movie._id !== _id)
           .slice(0, 12);

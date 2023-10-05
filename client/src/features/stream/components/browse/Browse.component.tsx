@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../../hooks/redux/hooks";
 import { Movie } from "../../models/movie.interface";
 import { getAllMovies } from "../../streamSlice";
-import { NavBar } from "../../../navBar/NavBar.component";
 import { TopBanner } from "./Browse.styled";
 import "./Browser.css";
 import { Link } from "react-router-dom";
+import { Skeleton } from "@mui/material";
+import NavBar from "../../../navBar/NavBar.component";
 
 const BrowseComponent = () => {
   const dispatch = useAppDispatch();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  document.title = "Browse Movies";
 
   const fetchMovies = async () => {
     try {
@@ -18,7 +20,6 @@ const BrowseComponent = () => {
       const movieData = response.payload;
       setMovies(movieData as Movie[]);
       setIsLoading(false);
-      console.log(movies);
     } catch (error) {
       console.error(error);
     }
@@ -27,6 +28,23 @@ const BrowseComponent = () => {
   useEffect(() => {
     fetchMovies();
   }, []);
+
+  const renderSkeletons = () => (
+    <div className="skeleton-container">
+      {Array(50)
+        .fill(0)
+        .map((_, index) => (
+          <Skeleton
+            key={index}
+            variant="rectangular"
+            width={250}
+            height={330}
+            sx={{ bgcolor: "grey.900" }}
+            animation="wave"
+          />
+        ))}
+    </div>
+  );
 
   return (
     <>
@@ -44,7 +62,7 @@ const BrowseComponent = () => {
       </TopBanner>
 
       {isLoading ? (
-        <p>Loading...</p>
+        renderSkeletons()
       ) : (
         <div className="items-b">
           {movies.map((movie) => (

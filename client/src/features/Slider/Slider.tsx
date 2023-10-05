@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Slider: React.FC<{
   movies: Movie[];
   carouselDesc: string;
-  id: string;
+  id?: string;
 }> = ({ movies, carouselDesc, id }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 

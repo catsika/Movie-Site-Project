@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AccountBox,
   ContainerCustom,
   Content,
+  Dropdown,
   Logo,
   NavBucket,
   NavListItem,
@@ -11,17 +12,38 @@ import {
 } from "./NavBar.styled";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate, useLocation } from "react-router-dom";
+import { SearchMovie } from "../../shared/utils/search";
+import { Movie } from "../stream/models/movie.interface";
+import { useAppDispatch } from "../../hooks/redux/hooks";
+import { getAllMovies } from "../stream/streamSlice";
 
 interface NavBarProps {
-  customColor?: string; // Optional custom color prop
+  customColor?: string;
 }
 
-export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
-  const [isToggled, setIsToggled] = useState<boolean>(false);
+const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
+  const [isToggled, setIsToggled] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const searchRef = useRef<HTMLDivElement>(null);
   const [backgroundColor, setBackgroundColor] = useState("");
   const navigate = useNavigate();
-  const location = useLocation(); // Get the current route location
+  const location = useLocation();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await dispatch(getAllMovies());
+        const movieData = response.payload;
+        setMovies(movieData as Movie[]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchMovies();
+  }, [dispatch]);
 
   const handleSearchClick = () => {
     setIsToggled(!isToggled);
@@ -29,21 +51,13 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!customColor) {
-        setBackgroundColor(window.scrollY > 0 ? "black" : "transparent");
-      }
+      setBackgroundColor(window.scrollY > 0 ? "black" : "transparent");
     };
-
-    if (!customColor) {
-      window.addEventListener("scroll", handleScroll);
-    }
-
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      if (!customColor) {
-        window.removeEventListener("scroll", handleScroll);
-      }
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [customColor]);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -52,25 +66,29 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
         !searchRef.current.contains(event.target as Node)
       ) {
         setIsToggled(false);
+        setDropdownVisible(false);
       }
     };
-
     document.addEventListener("click", handleClickOutside);
-
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
-  // Define an array of allowed routes
   const allowedRoutes = ["/", "/featured", "/channels", "/news"];
 
-  // Function to handle navigation based on the clicked item
   const handleTabClick = (url: string) => {
     if (allowedRoutes.includes(url)) {
       navigate(url);
     }
   };
+
+  const searchResults = SearchMovie(searchInput, movies);
+  console.log(searchResults);
+
+  useEffect(() => {
+    setDropdownVisible(searchResults.length > 0 && searchInput !== "");
+  }, [searchResults, searchInput]);
 
   return (
     <ContainerCustom color={customColor || backgroundColor}>
@@ -104,12 +122,17 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
             ))}
           </NavListWrap>
         </NavBucket>
+
         <AccountBox>
           <Search ref={searchRef}>
             <input
               className={`input ${isToggled ? "toggle" : ""}`}
               type="text"
               placeholder="Find your favorite movies"
+              value={searchInput}
+              onChange={(e) => {
+                setSearchInput(e.target.value);
+              }}
             />
             <SearchIcon
               fontSize="large"
@@ -119,7 +142,14 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
             />
           </Search>
         </AccountBox>
+        <Dropdown className="show">
+          {searchResults.map((result, index) => (
+            <div key={index}>{result}</div>
+          ))}
+        </Dropdown>
       </Content>
     </ContainerCustom>
   );
 };
+
+export default NavBar;

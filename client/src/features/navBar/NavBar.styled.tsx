@@ -131,3 +131,16 @@ export const Search = styled(Box)(() => ({
 export const User = styled(Box)(() => ({
   fontSize: "0",
 }));
+
+export const Dropdown = styled("div")(({}) => ({
+  display: "none", // Corrected from display: none; to display: "none"
+  position: "absolute",
+  backgroundColor: "#f6f6f6", // Use backgroundColor instead of background-color
+  minWidth: "160px",
+  boxShadow: "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
+  zIndex: 1, // Corrected from z-index: 1; to zIndex: 1
+
+  "&.show": {
+    display: "block",
+  },
+}));
