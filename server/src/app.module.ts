@@ -5,15 +5,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { MovieModule } from './movie/movie.module';
 import { AuthModule } from './auth/auth.module';
-import { UserService } from './user/user.service';
-import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.development.env' }),
     MongooseModule.forRoot(
-      'mongodb+srv://db_admin:AlObWTiAnDyYwSMX@cluster0.9hxs56j.mongodb.net/?retryWrites=true&w=majority',
+      `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@${process.env.MONGO_DB_CLUSTER}/?retryWrites=true&w=majority`,
     ),
     MovieModule,
     AuthModule,

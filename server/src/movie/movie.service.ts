@@ -5,9 +5,9 @@ import { MovieDocument } from './movie.schema';
 import { v2 as cloudinary } from 'cloudinary';
 
 cloudinary.config({
-  cloud_name: 'dxiji9xgy',
-  api_key: '554721476828145',
-  api_secret: '2tSsQ88I_DlgV69La4lMH7llWU0',
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 @Injectable()

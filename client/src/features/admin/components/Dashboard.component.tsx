@@ -30,21 +30,27 @@ const steps = [
 
 const allGenres = [
   "Action",
-  "Comedy",
-  "Drama",
-  "Romance",
-  "Thriller",
-  "Horror",
-  "Sci-Fi",
   "Adventure",
-  "Fantasy",
   "Animation",
-  "Documentary",
-  "Mystery",
-  "Crime",
-  "History",
   "Biography",
+  "Comedy",
+  "Crime",
+  "Documentary",
+  "Drama",
+  "Fantasy",
+  "Historical",
+  "Horror",
+  "Musical",
+  "Mystery",
+  "Romance",
+  "Sci-Fi",
+  "Sport",
+  "Thriller",
+  "War",
+  "Western",
 ];
+
+allGenres.sort();
 
 export default function MovieUploadStepper() {
   const [activeStep, setActiveStep] = useState(0);
@@ -86,7 +92,7 @@ export default function MovieUploadStepper() {
 
   const uploadMovie = async (payload: any) => {
     const movie = await dispatch(upload(payload));
-    return movie;
+    return movie.payload;
   };
 
   const handleFinish = async () => {
@@ -113,14 +119,13 @@ export default function MovieUploadStepper() {
 
     try {
       const uploaded = await uploadMovie(formData);
-      console.log(uploaded);
     } catch (error) {
       // Handle any errors during upload
       console.error("Upload failed:", error);
     } finally {
       // Finish uploading
       setUploading(false);
-      handleReset();
+      setTimeout(handleReset, 5000);
     }
   };
 
@@ -316,7 +321,11 @@ export default function MovieUploadStepper() {
                     value={
                       releaseDate ? releaseDate.toISOString().split("T")[0] : ""
                     }
-                    onChange={(e) => setReleaseDate(new Date(e.target.value))}
+                    onChange={(e) =>
+                      e.target.value
+                        ? setReleaseDate(new Date(e.target.value))
+                        : setReleaseDate(null)
+                    }
                   />
                 </div>
               </div>
