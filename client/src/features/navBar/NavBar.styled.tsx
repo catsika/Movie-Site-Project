@@ -133,14 +133,35 @@ export const User = styled(Box)(() => ({
 }));
 
 export const Dropdown = styled("div")(({}) => ({
-  display: "none", // Corrected from display: none; to display: "none"
+  display: "none",
   position: "absolute",
-  backgroundColor: "#f6f6f6", // Use backgroundColor instead of background-color
-  minWidth: "160px",
-  boxShadow: "0px 8px 16px 0px rgba(0, 0, 0, 0.2)",
-  zIndex: 1, // Corrected from z-index: 1; to zIndex: 1
+  top: "80%",
+  right: "130px",
+  backgroundColor: "black",
+  width: "250px",
+  zIndex: 1,
+  borderRadius: "8px",
+  paddingTop: "5px",
+  paddingBottom: "5px",
+  maxHeight: "300px",
+  overflowY: "auto",
 
   "&.show": {
     display: "block",
   },
+
+  "& > div": {
+    display: "flex",
+    alignItems: "center",
+    color: "white",
+    padding: `15px`,
+    fontSize: "18px",
+    textDecoration: "none",
+    transition: "background-color 0.3s ease",
+    cursor: "pointer",
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
 }));
+

@@ -12,5 +12,5 @@ export const SearchMovie = (query: string, movies: Movie[]) => {
   const searchResults = query ? fuse.search(query) : [];
 
   // Log or return the search results
-  return searchResults.map((result) => result.item.title);
+  return searchResults.map((result) => result.item);
 };

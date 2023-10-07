@@ -1,0 +1,14 @@
+.link {
+  text-decoration: none;
+  color: white; /* Change the color to your desired link color */
+  display: block;
+  padding: 15px;
+  font-size: 18px;
+  transition: color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: #ffcc66; /* Change the color on hover */
+    cursor: pointer;
+  }
+}
