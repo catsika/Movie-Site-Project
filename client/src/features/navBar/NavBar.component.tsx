@@ -46,7 +46,7 @@ const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
       }
     };
     fetchMovies();
-  }, [dispatch]);
+  }, [dispatch, searchInput]);
 
   const handleSearchClick = () => {
     setIsToggled(!isToggled);

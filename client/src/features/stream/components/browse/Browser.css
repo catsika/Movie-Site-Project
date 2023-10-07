@@ -73,10 +73,10 @@
 
 .skeleton-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap; /* Adjust alignment as needed */
-  gap: 20px; /* Adjust the gap between skeletons as needed */
-  padding: 20px; /* Add padding to the container as needed */
+  gap: 5px; /* Adjust the gap between skeletons as needed */
+  padding: 5px; /* Add padding to the container as needed */
 }
 
 /* Rest of your CSS remains the same */

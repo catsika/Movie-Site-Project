@@ -48,7 +48,7 @@ const FeaturedComponent = () => {
 
   const renderSkeletons = () => (
     <div className="skeleton-container">
-      {Array(50)
+      {Array(18)
         .fill(0)
         .map((_, index) => (
           <Skeleton
