@@ -8,6 +8,6 @@ async function bootstrap() {
   app.use(expressUrlEncoded({ limit: '50mb', extended: true }));
   app.enableCors();
   app.setGlobalPrefix('api');
-  await app.listen(3000);
+  await app.listen(process.env.PORT);
 }
 bootstrap();
