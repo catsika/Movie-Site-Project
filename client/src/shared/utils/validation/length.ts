@@ -1,4 +1,3 @@
-import axios, { AxiosResponse } from "axios";
 import { LengthOptions } from "./models/options/length";
 import { ValidatorFn } from "./models/Validatorfn";
 

@@ -5,10 +5,10 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
 interface IVideoPlayerProps {
-  options: videojs.PlayerOptions;
+  options: any;
 }
 
-const initialOptions: videojs.PlayerOptions = {
+const initialOptions: any = {
   controls: true,
   aspectRatio: "16:9",
   fluid: true,
@@ -19,25 +19,27 @@ const initialOptions: videojs.PlayerOptions = {
   },
 };
 
-const VideoPlayer: React.FC<IVideoPlayerProps> = ({ options }) => {
-  const videoNode = React.useRef<HTMLVideoElement>();
-  const player = React.useRef<videojs.Player>();
+export const VideoPlayer: React.FC<IVideoPlayerProps> = ({ options }) => {
+  const videoNode = React.useRef<HTMLVideoElement | null>(null);
+  const player = React.useRef<any | null>(null);
 
   React.useEffect(() => {
-    player.current = videojs(videoNode.current, {
-      ...initialOptions,
-      ...options,
-    }).ready(function () {
-      // console.log('onPlayerReady', this);
-    });
+    if (videoNode.current) {
+      // Ensure videoNode.current is not null
+      player.current = videojs(videoNode.current, {
+        ...initialOptions,
+        ...options,
+      }).ready(function () {
+        // console.log('onPlayerReady', this);
+      });
+    }
     return () => {
       if (player.current) {
         player.current.dispose();
+        player.current = null;
       }
     };
-  }, [options]);
+  }, [options, videoNode.current]); // Include videoNode.current in the dependency array
 
   return <video ref={videoNode} className="video-js" />;
 };
-
-export default VideoPlayer;

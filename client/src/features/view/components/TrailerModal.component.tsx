@@ -1,9 +1,8 @@
 /* TrailerModal.tsx */
 import React from "react";
 import "./TrailerModal.css"; // Create a corresponding CSS file for styling
-import VideoPlayer from "./VideoJs.component";
 import CloseIcon from "@mui/icons-material/Close";
-
+import { VideoPlayer } from "./VideoJs.component";
 interface TrailerModalProps {
   videoUrl: string;
   onClose: () => void; // Define the onClose prop as a function
