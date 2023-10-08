@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Slider: React.FC<{
+export const Slider: React.FC<{
   movies: Movie[];
   carouselDesc: string;
   id?: string;
@@ -66,5 +66,3 @@ const Slider: React.FC<{
     </div>
   );
 };
-
-export default Slider;

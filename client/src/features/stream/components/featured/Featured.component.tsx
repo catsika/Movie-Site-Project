@@ -3,14 +3,14 @@ import { useAppDispatch } from "../../../../hooks/redux/hooks";
 import { Movie } from "../../models/movie.interface";
 import { getAllMovies } from "../../streamSlice";
 import { TopBanner } from "./Featured.styled";
-import Slider from "../../../slider/Slider.component";
+import {Slider} from "../../../contentSlider/Slider";
 import {
   new_releases,
   newly_added_sort,
   top_rated,
 } from "../../../algorithms/sorting";
 import { Skeleton } from "@mui/material";
-import RecommendAlgo from "../../../algorithms/Recommendations";
+import RecommendAlgo from "../../../algorithms/recommendations";
 import NavBar from "../../../navBar/NavBar.component";
 
 const FeaturedComponent = () => {
