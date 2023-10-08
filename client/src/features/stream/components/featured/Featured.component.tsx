@@ -10,7 +10,7 @@ import {
   top_rated,
 } from "../../../algorithms/sorting";
 import { Skeleton } from "@mui/material";
-import { RecommendAlgo } from "../../../algorithms/recommendations.ts";
+import { RecommendAlgo } from "../../../algorithms/Recommendations";
 import { NavBar } from "../../../navBar/NavBar.component";
 
 const FeaturedComponent = () => {
