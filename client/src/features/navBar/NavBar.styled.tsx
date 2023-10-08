@@ -82,13 +82,14 @@ export const NavListItem = styled("li")(() => ({
 export const AccountBox = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
-  marginRight: "100px",
+  marginRight: "50px",
 }));
 
 export const Search = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
-  marginRight: "5px",
+  marginLeft: "5px",
+  marginRight: "10px",
   fontSize: "0",
   position: "relative",
   visibility: "hidden",
@@ -136,7 +137,7 @@ export const Dropdown = styled("div")(({}) => ({
   display: "none",
   position: "absolute",
   top: "80%",
-  right: "130px",
+  right: "120px",
   backgroundColor: "black",
   width: "250px",
   zIndex: 1,
@@ -164,4 +165,3 @@ export const Dropdown = styled("div")(({}) => ({
     },
   },
 }));
-

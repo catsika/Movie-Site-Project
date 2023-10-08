@@ -17,6 +17,7 @@ import { SearchMovie } from "../../shared/utils/search";
 import { Movie } from "../stream/models/movie.interface";
 import { useAppDispatch } from "../../hooks/redux/hooks";
 import { getAllMovies } from "../stream/streamSlice";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 interface NavBarProps {
   customColor?: string;
@@ -96,6 +97,16 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
     setDropdownVisible(searchResults.length > 0 && searchInput !== "");
   }, [searchInput]);
 
+  const handleLogout = async () => {
+    // Clear user authentication data from local storage
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("user");
+
+    window.location.reload();
+    // Replace "/login" with the desired route
+  };
+
   return (
     <ContainerCustom color={customColor || backgroundColor}>
       <Content className="parallax">
@@ -128,7 +139,6 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
             ))}
           </NavListWrap>
         </NavBucket>
-
         <AccountBox>
           <Search ref={searchRef}>
             <input
@@ -144,10 +154,17 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
               fontSize="large"
               className={`searchIcon ${isToggled ? "toggle" : ""}`}
               onClick={handleSearchClick}
-              style={{ color: "white" }}
+              style={{ color: "white", cursor: "pointer" }}
             />
           </Search>
+          <LogoutIcon
+            className="logout"
+            onClick={handleLogout}
+            sx={{ color: "white", cursor: "pointer" }}
+            fontSize="large"
+          />
         </AccountBox>
+
         <Dropdown ref={dropdownRef} className={dropdownVisible ? "show" : ""}>
           {" "}
           {searchResults.map((result, index) => (

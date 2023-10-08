@@ -12,3 +12,6 @@
     cursor: pointer;
   }
 }
+.logout {
+  padding: -20px;
+}
