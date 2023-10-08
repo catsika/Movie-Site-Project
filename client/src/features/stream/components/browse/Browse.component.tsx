@@ -6,7 +6,7 @@ import { TopBanner } from "./Browse.styled";
 import "./Browser.css";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@mui/material";
-import NavBar from "../../../navBar/NavBar.component";
+import { NavBar } from "../../../navBar/NavBar.component";
 
 const BrowseComponent = () => {
   const dispatch = useAppDispatch();

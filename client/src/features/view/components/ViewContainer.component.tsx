@@ -1,4 +1,4 @@
-import NavBar from "../../navBar/NavBar.component";
+import {NavBar} from "../../navBar/NavBar.component";
 import { Movie } from "../../stream/models/movie.interface";
 import { Meta } from "./Meta.component";
 

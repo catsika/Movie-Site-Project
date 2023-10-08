@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { getAllMovies } from "../stream/streamSlice";
 import { Movie } from "../stream/models/movie.interface";
 
-const RecommendAlgo = (genre: string[], _id?: string) => {
+export const RecommendAlgo = (genre: string[], _id?: string) => {
   const dispatch = useAppDispatch();
   const [sortedMovies, setSortedMovies] = useState<Movie[]>([]);
 
@@ -40,4 +40,3 @@ const RecommendAlgo = (genre: string[], _id?: string) => {
   return sortedMovies;
 };
 
-export default RecommendAlgo;

@@ -22,7 +22,7 @@ interface NavBarProps {
   customColor?: string;
 }
 
-const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
+export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
   const [isToggled, setIsToggled] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -166,4 +166,3 @@ const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
   );
 };
 
-export default NavBar;
