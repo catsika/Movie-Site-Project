@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../../../hooks/redux/hooks";
 import { Movie } from "../../models/movie.interface";
 import { getAllMovies } from "../../streamSlice";
 import { TopBanner } from "./Featured.styled";
-import Slider from "../../../slider/Slider";
+import Slider from "../../../slider/Slider.component";
 import {
   new_releases,
   newly_added_sort,
