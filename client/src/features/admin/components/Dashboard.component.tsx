@@ -118,7 +118,7 @@ export default function MovieUploadStepper() {
     formData.append("trailer", trailerFile!);
 
     try {
-      const uploaded = await uploadMovie(formData);
+      await uploadMovie(formData);
     } catch (error) {
       // Handle any errors during upload
       console.error("Upload failed:", error);

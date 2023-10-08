@@ -1,6 +1,6 @@
 import "./Suggest.css"; // Make sure to import your CSS file
 import { Movie } from "../../stream/models/movie.interface";
-import { RecommendAlgo } from "../../algorithms/recommendations";
+import { RecommendAlgo } from "../../algorithms/recommendations.ts";
 import { Slider } from "../../contentSlider/Slider";
 
 const Suggest = ({ metaData }: { metaData: Movie }) => {
