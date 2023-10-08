@@ -45,7 +45,7 @@ export const Slider: React.FC<{
         <div className="items" id={`carousel-items-${id}`}>
           {movies.map((movie) => (
             <Link
-              to={`/title/tt-${movie._id.slice(0, 8)}`}
+              to={`/title/tt-${movie._id.slice(0, 8)}?_id=${movie._id}`}
               state={{ _id: movie._id }}
               className="item"
               key={movie._id}
