@@ -153,7 +153,7 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
           {searchResults.map((result, index) => (
             <Link
               className="link"
-              to={`/title/tt-${result._id.slice(0, 8)}?_id=${result._id}`}
+              to={`/title/tt-${result._id.slice(0, 8)}`}
               state={{ _id: result._id }}
               key={result._id}
             >

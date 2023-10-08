@@ -2,23 +2,21 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../hooks/redux/hooks";
 import { getSelectMovie } from "../viewSlice";
 import { Movie } from "../../stream/models/movie.interface";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import ViewContainer from "./ViewContainer.component";
 
 const ViewComponent = () => {
   const dispatch = useAppDispatch();
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-  //const location = useLocation();
-  //const state = location.state; // Get the entire state object
-  //const { _id } = state; // Access the movieId from the state object
-  const { _id } = useParams();
-  const movieId = _id ?? ""; // Use an empty string as a default if _id is undefined
+  const location = useLocation();
+  const state = location.state; // Get the entire state object
+  const { _id } = state; // Access the movieId from the state object
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Dispatch the action to get movie data based on movieId
-        const action = await dispatch(getSelectMovie(movieId));
+        const action = await dispatch(getSelectMovie(_id));
         if (getSelectMovie.fulfilled.match(action)) {
           // Check if the action is fulfilled
           const movieData = action.payload;
