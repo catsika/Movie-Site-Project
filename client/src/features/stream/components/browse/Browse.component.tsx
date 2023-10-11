@@ -76,6 +76,7 @@ const BrowseComponent = () => {
                 className="item-image-b"
                 src={movie.media.poster}
                 alt="Item"
+                loading="lazy"
               />
               <span
                 className="item-load-icon button opacity-none"

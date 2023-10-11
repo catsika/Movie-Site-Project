@@ -5,20 +5,15 @@ const upload = async (
   newMovie: newMovie,
   headers: AxiosRequestConfig["headers"]
 ): Promise<Movie | any> => {
-  // Merge the headers from AxiosRequestConfig with your custom headers
-  const mergedHeaders = {
-    ...headers, // Existing headers from AxiosRequestConfig
-    "Content-Type": "multipart/form-data", // Additional header
-  };
-
   const { data } = await axios.post(
     `${import.meta.env.VITE_BASE_API}/media/upload`,
     newMovie,
     {
-      headers: mergedHeaders, // Use the merged headers
+      headers,
     }
   );
-  return data;
+
+  return { data };
 };
 
 const adminService = {

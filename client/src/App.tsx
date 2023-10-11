@@ -37,7 +37,10 @@ function App() {
             <Route path="signin" element={<SignInPage />} />
           </Route>
           {/* Fix the title route */}
-          <Route path="/title/:id" element={<ViewComponent />} />
+          <Route
+            path="/title/:id"
+            element={<PrivateRoute page={<ViewComponent />} />}
+          />
           <Route path="*" element={<NotFoundPage />} /> {/* Fallback route */}
         </Routes>
       </Router>

@@ -16,10 +16,10 @@ import {
   SelectChangeEvent,
   CircularProgress,
 } from "@mui/material";
-import { ArrowBack, Check } from "@mui/icons-material";
+import { ArrowBack, Check, Close } from "@mui/icons-material";
 import "./MovieUploadStepper.css";
-import { useAppDispatch } from "../../../hooks/redux/hooks";
-import { upload } from "../adminSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux/hooks";
+import { selectedAdmin, upload, resetAdminState } from "../adminSlice";
 import Chip from "@mui/material/Chip";
 
 const steps = [
@@ -63,10 +63,8 @@ export default function MovieUploadStepper() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [releaseDate, setReleaseDate] = useState<Date | null>(null);
   const [durationMinutes, setDurationMinutes] = useState<number>(0);
-
   const dispatch = useAppDispatch();
-
-  const [uploading, setUploading] = useState(false); // Track upload progress
+  const admin = useAppSelector(selectedAdmin);
 
   const handleNext = () => {
     if (activeStep === 0 && !validateStepOne()) return;
@@ -98,9 +96,6 @@ export default function MovieUploadStepper() {
   const handleFinish = async () => {
     if (!validateStepThree()) return;
 
-    // Start uploading
-    setUploading(true);
-
     const formData = new FormData();
     formData.append("title", movieTitle);
     formData.append("synopsis", synopsis);
@@ -119,13 +114,16 @@ export default function MovieUploadStepper() {
 
     try {
       await uploadMovie(formData);
+      setTimeout(() => {
+        dispatch(resetAdminState());
+        handleReset();
+      }, 5000);
     } catch (error) {
-      // Handle any errors during upload
       console.error("Upload failed:", error);
-    } finally {
-      // Finish uploading
-      setUploading(false);
-      setTimeout(handleReset, 5000);
+      setTimeout(() => {
+        dispatch(resetAdminState());
+        handleReset();
+      }, 5000);
     }
   };
 
@@ -386,8 +384,8 @@ export default function MovieUploadStepper() {
   };
 
   return (
-    <Box className={`container ${uploading ? "blur" : ""}`}>
-      {uploading && <div className="backdrop" />}
+    <Box className={`container ${admin.isUploading ? "blur" : ""}`}>
+      {admin.isUploading && <div className="backdrop" />}
 
       <Box className="stepper-container">
         <Stepper activeStep={activeStep} alternativeLabel>
@@ -433,17 +431,23 @@ export default function MovieUploadStepper() {
                   activeStep === steps.length - 1 ? handleFinish : handleNext
                 }
                 endIcon={
-                  uploading ? (
+                  admin.isUploading ? (
                     <CircularProgress size={24} />
-                  ) : (
-                    <Check style={{ color: "black" }} />
-                  )
+                  ) : admin.isSuccess === true ? (
+                    <Check style={{ color: "gold" }} />
+                  ) : admin.isError === true ? (
+                    <Close style={{ color: "red" }} />
+                  ) : null
                 }
                 style={{ backgroundColor: "white", color: "black" }}
-                disabled={uploading}
+                disabled={admin.isUploading}
               >
-                {uploading
+                {admin.isUploading
                   ? "Uploading..."
+                  : admin.isSuccess
+                  ? "Success"
+                  : admin.isError
+                  ? "Failed"
                   : activeStep === steps.length - 1
                   ? "Finish"
                   : "Next"}

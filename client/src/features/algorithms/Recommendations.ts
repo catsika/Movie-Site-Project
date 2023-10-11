@@ -12,6 +12,7 @@ export const RecommendAlgo = (genre: string[], _id?: string) => {
       try {
         const response = await dispatch(getAllMovies());
         const movies = (response.payload as Movie[]) || [];
+        const primaryGenre = genre[0];
 
         const sortedMovies = movies
           .slice()
@@ -19,10 +20,12 @@ export const RecommendAlgo = (genre: string[], _id?: string) => {
           .sort((movieA, movieB) => {
             const similarityA =
               genre.filter((g) => movieA.genre.includes(g)).length /
-              new Set([...genre, ...movieA.genre]).size;
+                new Set([...genre, ...movieA.genre]).size +
+              (movieA.genre.includes(primaryGenre) ? 1 : 0); // Add bonus score if movie includes primary genre
             const similarityB =
               genre.filter((g) => movieB.genre.includes(g)).length /
-              new Set([...genre, ...movieB.genre]).size;
+                new Set([...genre, ...movieB.genre]).size +
+              (movieB.genre.includes(primaryGenre) ? 1 : 0); // Add bonus score if movie includes primary genre
             return similarityB - similarityA; // Only primary sorting based on genre similarity
           })
           .filter((movie) => movie._id !== _id)
@@ -39,4 +42,3 @@ export const RecommendAlgo = (genre: string[], _id?: string) => {
 
   return sortedMovies;
 };
-

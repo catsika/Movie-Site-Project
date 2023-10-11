@@ -17,7 +17,7 @@ export const upload = createAsyncThunk(
       const token = tokenObject ? JSON.parse(tokenObject).token : null; // Extract the token property
       const headers = {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json", // You may adjust the content type as needed
+        "Content-Type": "multipart/form-data", // You may adjust the content type as needed
       };
       return await adminService.upload(movie, headers);
     } catch (error: any) {
@@ -29,7 +29,14 @@ export const upload = createAsyncThunk(
 export const adminSlice = createSlice({
   name: "admin",
   initialState,
-  reducers: {},
+  reducers: {
+    resetAdminState: (state) => {
+      // Reset the admin state to its initial values
+      state.isUploading = false;
+      state.isSuccess = false;
+      state.isError = false;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(upload.pending, (state) => {
@@ -49,3 +56,4 @@ export const selectedAdmin = (state: RootState) => {
   return state.admin;
 };
 export default adminSlice.reducer;
+export const { resetAdminState } = adminSlice.actions;

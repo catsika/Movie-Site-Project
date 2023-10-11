@@ -4,11 +4,15 @@ import { Model } from 'mongoose';
 import { MovieDocument } from './movie.schema';
 import { v2 as cloudinary } from 'cloudinary';
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET,
-});
+async function configureCloudinary() {
+  cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+  });
+}
+
+// Call configureCloudinary() at the beginning of your application or before uploading.
 
 @Injectable()
 export class MovieService {
@@ -26,18 +30,21 @@ export class MovieService {
   }
 
   async uploadMedia(file: Express.Multer.File): Promise<{ url: string }> {
-    return new Promise<{ url: string }>((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream({ resource_type: 'auto' }, (error, result) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve({ url: result.secure_url });
-          }
-        })
-        .end(file.buffer);
+    return configureCloudinary().then(() => {
+      return new Promise<{ url: string }>((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream({ resource_type: 'auto' }, (error, result) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve({ url: result.secure_url });
+            }
+          })
+          .end(file.buffer);
+      });
     });
   }
+
   async upload(
     title: string,
     synopsis: string,

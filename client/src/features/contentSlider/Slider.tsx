@@ -50,7 +50,12 @@ export const Slider: React.FC<{
               className="item"
               key={movie._id}
             >
-              <img className="item-image" src={movie.media.poster} alt="Item" />
+              <img
+                className="item-image"
+                src={movie.media.poster}
+                alt="Item"
+                loading="lazy"
+              />
               <span
                 className="item-load-icon button opacity-none"
                 style={{
