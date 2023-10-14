@@ -3,7 +3,6 @@ import { theme } from "./shared/utils/theme";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SignInPage } from "./pages/SignIn.page";
 import SignUpPage from "./pages/SignUp.page";
-import NotFoundPage from "./pages/NotFound.page";
 import StreamPage from "./pages/Stream.page";
 import PrivateRoute from "./features/auth/components/PrivateRoute.component";
 import { AdminSignIn } from "./pages/AdminSignIn.page";
@@ -41,7 +40,7 @@ function App() {
             path="/title/:id"
             element={<PrivateRoute page={<ViewComponent />} />}
           />
-          <Route path="*" element={<NotFoundPage />} /> {/* Fallback route */}
+          <Route path="*" element={<PrivateRoute page={<StreamPage />} />} />
         </Routes>
       </Router>
     </ThemeProvider>

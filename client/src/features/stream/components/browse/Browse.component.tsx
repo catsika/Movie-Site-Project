@@ -21,7 +21,7 @@ const BrowseComponent = () => {
       setMovies(movieData as Movie[]);
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
+      setIsLoading(false); // Set loading to false even in case of an error
     }
   };
 
@@ -52,12 +52,16 @@ const BrowseComponent = () => {
       <TopBanner>
         <a>
           <div className="bannerContent">
-            <img className="movieTitle" src="/images/the-boys-title.png" />
+            <img
+              className="movieTitle"
+              src="/images/the-boys-title.png"
+              alt="The Boys Title"
+            />
             <span className="movieDescription">
               New Season, New Action, New Drama
             </span>
           </div>
-          <img src="/images/the-boys-banner.jpeg" />
+          <img src="/images/the-boys-banner.jpeg" alt="The Boys Banner" />
         </a>
       </TopBanner>
 
@@ -67,14 +71,14 @@ const BrowseComponent = () => {
         <div className="items-b">
           {movies.map((movie) => (
             <Link
-              to={`/title/tt-${movie._id.slice(0, 8)}`}
-              state={{ _id: movie._id }}
+              to={`/title/tt-${movie?._id?.slice(0, 8) || ""}`}
+              state={{ _id: movie?._id || "" }}
               className="item-b"
-              key={movie._id}
+              key={movie?._id || ""}
             >
               <img
                 className="item-image-b"
-                src={movie.media.poster}
+                src={movie?.media?.poster || ""}
                 alt="Item"
                 loading="lazy"
               />

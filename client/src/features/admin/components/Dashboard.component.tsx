@@ -96,6 +96,13 @@ export default function MovieUploadStepper() {
   const handleFinish = async () => {
     if (!validateStepThree()) return;
 
+    const handleResetAfterUpload = () => {
+      setTimeout(() => {
+        dispatch(resetAdminState());
+        handleReset();
+      }, 5000);
+    };
+
     const formData = new FormData();
     formData.append("title", movieTitle);
     formData.append("synopsis", synopsis);
@@ -114,16 +121,10 @@ export default function MovieUploadStepper() {
 
     try {
       await uploadMovie(formData);
-      setTimeout(() => {
-        dispatch(resetAdminState());
-        handleReset();
-      }, 5000);
+      handleResetAfterUpload();
     } catch (error) {
       console.error("Upload failed:", error);
-      setTimeout(() => {
-        dispatch(resetAdminState());
-        handleReset();
-      }, 5000);
+      handleResetAfterUpload();
     }
   };
 

@@ -9,44 +9,53 @@ const ViewComponent = () => {
   const dispatch = useAppDispatch();
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const location = useLocation();
-  const state = location.state; // Get the entire state object
-  const { _id } = state; // Access the movieId from the state object
+  const state = location.state;
+  const _id = state && state._id;
 
   useEffect(() => {
+    let isMounted = true; // Add a variable to track if the component is mounted
+
     const fetchData = async () => {
       try {
-        // Dispatch the action to get movie data based on movieId
-        const action = await dispatch(getSelectMovie(_id));
-        if (getSelectMovie.fulfilled.match(action)) {
-          // Check if the action is fulfilled
-          const movieData = action.payload;
-          setSelectedMovie(movieData);
-
-          // Ensure that movieData is not null before accessing its properties
-          if (movieData) {
-            // Extract the release year from the releaseDate
-            const releaseYear = new Date(
-              movieData.details.releaseDate
-            ).getFullYear();
-
-            // Set the page title to "Movie Title (Release Year) "
-            document.title = `${movieData.title} (${releaseYear})`;
+        if (_id && isMounted) {
+          const action = await dispatch(getSelectMovie(_id));
+          if (getSelectMovie.fulfilled.match(action)) {
+            const movieData = action.payload;
+            if (isMounted) {
+              setSelectedMovie(movieData);
+              if (movieData) {
+                const releaseYear = new Date(
+                  movieData.details.releaseDate
+                ).getFullYear();
+                document.title = `${movieData.title} (${releaseYear})`;
+              }
+            }
+          } else {
+            // Handle the case when the action is rejected or other cases
+            if (isMounted) {
+              setSelectedMovie(null);
+            }
           }
         } else {
-          // Handle the rejected or other cases
-          setSelectedMovie(null); // Handle the error as needed
+          // Handle the case when _id is null
+          // Redirect or handle this case as needed
         }
       } catch (error) {
-        console.error("Error fetching movie data: ", error);
-        setSelectedMovie(null); // Handle the error as needed
+        if (isMounted) {
+          setSelectedMovie(null);
+        }
       }
     };
 
     fetchData();
+
+    return () => {
+      isMounted = false; // Set isMounted to false when the component is unmounted
+    };
   }, [_id, dispatch]);
 
   if (!selectedMovie) {
-    return null; // You can return a loading indicator or handle the error case here
+    return <div>Loading...</div>; // Return a loading indicator or handle the error case here
   }
 
   return <ViewContainer metaData={selectedMovie} />;

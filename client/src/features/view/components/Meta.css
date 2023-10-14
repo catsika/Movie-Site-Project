@@ -3,6 +3,7 @@
   width: 100%;
   font-family: "Roboto", sans-serif;
   border-bottom: 1px solid #92828255; /* Lighter grey border bottom */
+  overflow: scroll; /* Prevent child elements from overflowing */
 }
 
 .movie-card {
@@ -32,7 +33,7 @@
 }
 
 .card-categories p:not(:last-child)::after {
-  content: " | "; /* pipe separator */
+  content: " \2022 ";
   color: #fff; /* color of separator */
 }
 
@@ -90,8 +91,8 @@
 .rating p,
 .card-categories p {
   color: #ccc;
-  font-weight: 50; /* Makes font thinner */
-  letter-spacing: 1.5px; /* Increase the spacing between character */
+  font-weight: 30; /* Makes font thinner */
+  letter-spacing: 1.2px; /* Increase the spacing between character */
 }
 
 .play-button,

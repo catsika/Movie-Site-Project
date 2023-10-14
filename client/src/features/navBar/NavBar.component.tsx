@@ -85,7 +85,7 @@ export const NavBar: React.FC<NavBarProps> = ({ customColor }) => {
     };
   }, [dropdownVisible]);
 
-  const allowedRoutes = ["/", "/featured", "/channels", "/news"];
+  const allowedRoutes = ["/", "/featured"];
 
   const handleTabClick = (url: string) => {
     if (allowedRoutes.includes(url)) {
